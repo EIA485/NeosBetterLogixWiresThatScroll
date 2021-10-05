@@ -1,4 +1,4 @@
-# NeosBetterLogixWiresThatScroll
+# BetterLogixWiresThatScroll
 
 A [NeosModLoader](https://github.com/zkxs/NeosModLoader) mod for [Neos VR](https://neos.com/) that optimizes and anamates the rendering of logix wires. it optimizes the rendering by making them use shared materials. it anamates the logix wires by paning them on the x axis. this is a temporary mod till [NeosModLoader](https://github.com/zkxs/NeosModLoader) implements a config system. once [NeosModLoader](https://github.com/zkxs/NeosModLoader) implements a config system this mod will be merged into [BetterLogixWires](https://github.com/eia485/NeosBetterLogixWires/)
 
