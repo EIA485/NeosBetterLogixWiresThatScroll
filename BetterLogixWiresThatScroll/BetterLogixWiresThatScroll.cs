@@ -11,7 +11,7 @@ namespace BetterLogixWiresThatScroll
 	{
 		public override string Name => "BetterLogixWiresThatScroll";
 		public override string Author => "eia485";
-		public override string Version => "1.0.0";
+		public override string Version => "1.0.1";
 		public override string Link => "https://github.com/EIA485/NeosBetterLogixWiresThatScroll/";
 		public override void OnEngineInit()
 		{
@@ -28,7 +28,6 @@ namespace BetterLogixWiresThatScroll
 			{
 				Type type = GetWireType(__instance.InputField.Target.GetType());
 				___Material.Target = GetWireMaterial(color.Red, type.GetDimensions(), typeof(Impulse)==type, __instance);
-				AccessTools.Method(typeof(ConnectionWire), "SetColor").Invoke(__instance, new object[] { color.Red });
 				___WireSlot.Target.GetComponent<MeshRenderer>(null, false).Materials[0] = ___Material.Target;
 				return false;
 			}
@@ -39,7 +38,6 @@ namespace BetterLogixWiresThatScroll
 			{
 				___TypeColor.Value = color;
 				___Material.Target = GetWireMaterial(color, dimensions, isImpulse, __instance);
-				AccessTools.Method(typeof(ConnectionWire), "SetColor").Invoke(__instance, new object[] { color });
 				___WireSlot.Target.GetComponent<MeshRenderer>(null, false).Materials.Add(___Material.Target);
 				return false;
 			}
@@ -163,6 +161,8 @@ namespace BetterLogixWiresThatScroll
 				float2 value = new float2(0.5f, 1f);
 				fresnelMaterial.NearTextureScale.Value = value;
 				fresnelMaterial.FarTextureScale.Value = value;
+				fresnelMaterial.NearColor.Value = color.MulA(.8f);
+				fresnelMaterial.FarColor.Value = color.MulRGB(.5f).MulA(.8f);
 				(listOfDrives.AddElement() as FieldDrive<float2>).Target = fresnelMaterial.NearTextureOffset;
 			}
 			else if (fresnelMaterial.NearTextureOffset.IsDriven | fresnelMaterial.NearTextureOffset.IsLinked)
