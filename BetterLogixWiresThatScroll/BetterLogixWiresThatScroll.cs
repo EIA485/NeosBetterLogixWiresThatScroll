@@ -164,16 +164,19 @@ namespace BetterLogixWiresThatScroll
 				fresnelMaterial.NearColor.Value = color.MulA(.8f);
 				fresnelMaterial.FarColor.Value = color.MulRGB(.5f).MulA(.8f);
 				(listOfDrives.AddElement() as FieldDrive<float2>).Target = fresnelMaterial.NearTextureOffset;
+				(listOfDrives.AddElement() as FieldDrive<float2>).Target = fresnelMaterial.FarTextureOffset;
 			}
-			else if (fresnelMaterial.NearTextureOffset.IsDriven | fresnelMaterial.NearTextureOffset.IsLinked)
+			else if (fresnelMaterial.NearTextureOffset.IsDriven | fresnelMaterial.NearTextureOffset.IsLinked | fresnelMaterial.FarTextureOffset.IsDriven | fresnelMaterial.FarTextureOffset.IsLinked)
 			{
-				if (!((fresnelMaterial.NearTextureOffset.ActiveLink as SyncElement).Component == multiDriver))
+				if (!((fresnelMaterial.NearTextureOffset.ActiveLink as SyncElement).Component == multiDriver) | (fresnelMaterial.FarTextureOffset.ActiveLink as SyncElement).Component ==multiDriver)
 				{
 					(listOfDrives.AddElement() as FieldDrive<float2>).ForceLink(fresnelMaterial.NearTextureOffset);
+					(listOfDrives.AddElement() as FieldDrive<float2>).ForceLink(fresnelMaterial.FarTextureOffset);
 				}
 			}
 			else
 				(listOfDrives.AddElement() as FieldDrive<float2>).Target = fresnelMaterial.NearTextureOffset;
+				(listOfDrives.AddElement() as FieldDrive<float2>).Target = fresnelMaterial.FarTextureOffset;
 			return fresnelMaterial;
 		}
 		public static Type GetWireType(Type t)
